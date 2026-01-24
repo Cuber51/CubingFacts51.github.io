@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cubing Facts 51: Learn 51 Cubing Facts</title>
+        <h1>Cubing Facts 51</h1>
+        <h3>Learn 51 Cubing Facts!</h3>
+        <h5>Created by: Cuber51 on January 23rd, 2026</h5>
+    </head>
+    <body>
+        <div style="text-align: center; margin-top: 50px;">
+        <h1>Enter a number between 1 and 51 to learn a cubing fact!</h1>
+        <input type="number" id="INT" min="1" max="51" placeholder="Enter number (1 ~ 51)" style="width: 30ch;">
+        <button onclick="lookupValue()">View Fact</button>
+        <p><span id="display_area"></span></p>
+        
+        <script>
+            const myData = {
+                1: "Did you know that the world record for solving a 3x3 Rubik's Cube is 3.05 seconds?",
+                2: "Did you know that the Rubik's Cube was invented in 1974 by Ernő Rubik?",
+                3: "Did you know that there are over 43 quintillion possible combinations of a standard 3x3 Rubik's Cube?",
+                4: "Did you know that the first speedcubing competition was held in 1982 in Budapest, Hungary?",
+                5: "Did you know that the largest Rubik's Cube that you can buy is a 21x21 cube?",
+                6: "Did you know that the Rubik's Cube was created to help students understand three-dimensional geometry?",
+                7: "Did you know that the world record for One-Handed solving is 5.66 seconds?",
+                8: "Did you know that Rubik's Cubes are sold in over 100 countries worldwide?",
+                9: "Did you know that the Rubik's Cube has been featured in numerous movies and TV shows?",
+                10: "Did you know that there is a world championship for speedcubing held every two years?",
+                11: "Did you know that the speedcubing competitions have different categories, including 2x2, 3x3, 4x4, and more?",
+                12: "Did you know that the speedcubing competitions also include blindfolded solving?",
+                13: "Did you know that the Rubik's Cube has inspired various art forms, including sculptures and paintings?",
+                14: "Did you know that the Rubik's Cube has its own official notation for moves?",
+                15: "Did you know that the speedcubes were first started in the 2010s when the Rubik's Cube patent expired?",
+                16: "Did you know that there are many different methods for solving the Rubik's Cube, including CFOP, Roux, and ZZ?",
+                17: "Did you know that the CFOP method is the most popular method used by speedcubers?",
+                18: "Did you know that the Roux method focuses on building blocks rather than layers?",
+                19: "Did you know that the ZZ method is known for its efficiency in reducing the number of moves?",
+                20: "Did you know there is a variation of the Rubik's Cube called the Pyraminx, which is pyramid-shaped?",
+            };
+
+           function lookupValue() {
+        const input = document.getElementById("INT").value;
+        const display = document.getElementById("display_area");
+        if (myData[input]) {
+            display.innerText = myData[input];
+        } else {
+            display.innerText = "INVALID INPUT Please try again";
+        }
+    }
+    </script>
+    </div>
+</body>
+</html>

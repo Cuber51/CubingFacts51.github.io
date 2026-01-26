@@ -1,123 +1,207 @@
 <!DOCTYPE html>
-<!--This website is still updating.-->
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cubing Facts 51</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        body {
-            font-family: sans-serif;
-            text-align: center;
-            margin-top: 50px;
-            background-color: #f4f4f9;
+        /* Unified Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
         }
+
+        body {
+            text-align: center;
+            background-color: #f4f4f9;
+            /* NEW: Make body a flex container that fills height */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #2d3436;
+            padding: 15px 5%;
+            width: 100%; /* Ensure navbar spans full width */
+            z-index: 1000;
+        }
+
+        .logo {
+            color: #fab1a0;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            padding: 0 15px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #fab1a0;
+        }
+
+        /* MODIFIED #app CONTAINER */
+        #app {
+            /* Fill remaining space */
+            flex: 1;
+            
+            /* Enable Flexbox */
+            display: flex;
+            flex-direction: column;
+            
+            /* Center Content Vertically & Horizontally */
+            justify-content: center;
+            align-items: center;
+            
+            /* Spacing */
+            padding: 20px;
+            gap: 20px; /* Adds space between elements automatically */
+        }
+
+        /* Header Styling */
+        h1 {
+            margin-bottom: 10px;
+            color: #2d3436;
+        }
+
         input {
-            width: 30ch;
-            padding: 8px;
+            width: 250px;
+            padding: 10px;
             font-size: 16px;
             border: 2px solid #ccc;
             border-radius: 4px;
+            text-align: center; /* Optional: Centers text inside input */
         }
+
         button {
-            padding: 8px 15px;
+            padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
             background-color: #007bff;
             color: white;
             border: none;
             border-radius: 4px;
+            transition: 0.2s;
         }
+
         button:hover {
             background-color: #0056b3;
         }
+
         #display_area {
-            display: block;
             margin-top: 20px;
-            font-size: 1.2em;
+            font-size: 1.3rem;
             font-weight: bold;
             color: #333;
+            max-width: 600px;
             min-height: 1.5em;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 10px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header Content -->
-    <h1>Cubing Facts 51</h1>
-    <h3>Learn 51 Cubing Facts!</h3>
-    <h5>Created by: Cuber51 on January 23rd, 2026</h5>
+    <nav class="navbar">
+        <a href="#" class="logo">Cubing Facts 51</a>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
 
-    <!-- Interactive App -->
     <div id="app">
-        <h1>Enter a number between 1 and 51</h1>
-        <!-- Added placeholder and min/max validation -->
-        <input type="number" id="INT" min="1" max="51" placeholder="Enter number (1 ~ 51)">
+        <h1>Enter a number to learn a cubing fact!</h1>
+        <input type="number" id="INT" min="1" max="51" placeholder="Enter a number (1 ~ 51)">
         <button onclick="lookupValue()">View Fact</button>
-        <p><span id="display_area"></span></p>
+        <p id="display_area"></p>
     </div>
 
     <script>
-        // Corrected Data Object
-        const myData = {
-            1: "Did you know that the world record for solving a 3x3 Rubik's Cube is 3.05 seconds?",
-            2: "Did you know that the Rubik's Cube was invented in 1974 by Ernő Rubik?",
-            3: "Did you know that there are over 43 quintillion possible combinations?",
-            4: "Did you know that the first speedcubing competition was held in 1982 in Budapest?",
-            5: "Did you know that the largest mass-produced Rubik's Cube is a 21x21 cube?",
-            6: "Did you know that the Cube was created to help students understand 3D geometry?",
-            7: "Did you know that the world record for One-Handed solving is 5.66 seconds?",
-            8: "Did you know that Rubik's Cubes are sold in over 100 countries worldwide?",
-            9: "Did you know that the Rubik's Cube has been featured in numerous movies and TV shows?",
-            10: "Did you know that there is a world championship for speedcubing held every two years?",
-            11: "Did you know that the speedcubing competitions have different categories, including 2x2, 3x3, 4x4, and more?",
-            12: "Did you know that the speedcubing competitions also include blindfolded solving?",
-            13: "Did you know that the Rubik's Cube has inspired various art forms, including sculptures and paintings?",
-            14: "Did you know that the Rubik's Cube has its own official notation for moves?",
-            15: "Did you know that speedcubes 'boomed' in the 2010s, though the original patent expired in 2000?",
-            16: "Did you know that there are many different methods for solving the Rubik's Cube, including CFOP, Roux, and ZZ?",
-            17: "Did you know that the CFOP method is the most popular method used by speedcubers?",
-            18: "Did you know that the Roux method focuses on building blocks rather than layers?",
-            19: "Did you know that the ZZ method is known for its efficiency in reducing the number of moves?",
-            20: "Did you know there is a variation of the Rubik's Cube called the Pyraminx, which is pyramid-shaped?",
-            21: "Did you know that the Megaminx is a dodecahedron-shaped twisty puzzle similar to the Rubik's Cube?",
-            22: "Did you know that the Skewb is a cube-shaped puzzle that twists around its corners?",
-            23: "Did you know that the Square-1 is a shape-shifting puzzle that can change its shape as you twist it?",
-            24: "Did you know that the speedcube community has its own slang and terminology?",
-            25: "Did you know that 'alg' is short for algorithm, which is a sequence of moves used to solve the cube?",
-            26: "Did you know that 'PLL' stands for Permutation of the Last Layer?",
-            27: "Did you know that 'OLL' stands for Orientation of the Last Layer?",
-            28: "Did you know that 'F2L' stands for First Two Layers?",
-            29: "Did you know that 'cubers' is a term used to refer to people who solve Rubik's Cubes?",
-            30: "Did you know that the World Cube Association (WCA) is the governing body for official speedcubing competitions?",
-            31: "Did you know that the World Cube Association (WCA) was founded in 2004?",
-            32: "Did you know that there are over 1,000 official WCA competitions held worldwide each year?",
-            33: "Did you know that there are over 100,000 registered WCA competitors?",
-            34: "Did you know that the WCA maintains official records for various cube sizes and categories?",
-            35: "Did you know that the Rubik's Cube has been used to teach problem-solving skills in schools?",
-            36: "Did you know that there are online communities and forums dedicated to speedcubing?",
-            37: "Did you know that there are YouTube channels and tutorials dedicated to teaching people how to solve the Rubik's Cube?",
-            38: "Did you know that there are mobile apps that help you learn how to solve the Rubik's Cube?",
-            39: "Did you know that a lot of speedcubers can solve the Rubik's Cube in under 10 seconds?",
-            40: "Did you know that the Rubik's Cube has been used for a variety of world records, including solving it while juggling?",
-            41: "Did you know that the Rubik's Cube has been used in robotics competitions?",
-            42: "Did you know that there are custom stickers and designs available for Rubik's Cubes?",
-            43: "Did you know that almost every speedcuber lubricates their cube?",
-            44: "Did you know that the Rubik's Cube has been featured in music videos?",
-            45: "Did you know that the Rubik's Cube has been used in psychological studies on problem-solving and cognition?",
-            46: "Did you know that the Rubik's Cube has a dedicated museum in Budapest, Hungary?",
-            47: "Did you know that the Rubik's Cube has been used in various educational programs to teach math and spatial reasoning?",
-            48: "Did you know that the Rubik's Cube has inspired various competitions, including solving it with feet?",
-            49: "Did you know that the Rubik's Cube has been used in art installations around the world?",
-            50: "Did you know that the Rubik's Cube has a dedicated day called 'Rubik's Cube Day' celebrated on July 13th?",
-            51: "Did you know that the Rubik's Cube continues to inspire new generations?"
-        };
+        const facts = [
+            "Did you know that the world record for solving a 3x3 Rubik's Cube is 3.05 seconds?",
+            "Did you know that the Rubik's Cube was invented in 1974 by Ernő Rubik?",
+            "Did you know that there are over 43 quintillion possible combinations of a standard 3x3 Rubik's Cube?",
+            "Did you know that the first speedcubing competition was held in 1982 in Budapest, Hungary?",
+            "Did you know that the largest Rubik's Cube that you can buy is a 21x21 cube?",
+            "Did you know that the Rubik's Cube was created to help students understand three-dimensional geometry?",
+            "Did you know that the world record for One-Handed solving is 5.66 seconds?",
+            "Did you know that Rubik's Cubes are sold in over 100 countries worldwide?",
+            "Did you know that the Rubik's Cube has been featured in numerous movies and TV shows?",
+            "Did you know that there is a world championship for speedcubing held every two years?",
+            "Did you know that the speedcubing competitions have different categories, including 2x2, 3x3, 4x4, and more?",
+            "Did you know that the speedcubing competitions also include blindfolded solving?",
+            "Did you know that the Rubik's Cube has inspired various art forms, including sculptures and paintings?",
+            "Did you know that the Rubik's Cube has its own official notation for moves?",
+            "Did you know that the speedcubes were first started in the 2010s when the Rubik's Cube patent expired?",
+            "Did you know that there are many different methods for solving the Rubik's Cube, including CFOP, Roux, and ZZ?",
+            "Did you know that the CFOP method is the most popular method used by speedcubers?",
+            "Did you know that the Roux method focuses on building blocks rather than layers?",
+            "Did you know that the ZZ method is known for its efficiency in reducing the number of moves?",
+            "Did you know there is a variation of the Rubik's Cube called the Pyraminx, which is pyramid-shaped?",
+            "Did you know that the Megaminx is a dodecahedron-shaped twisty puzzle similar to the Rubik's Cube?",
+            "Did you know that the Skewb is a cube-shaped puzzle that twists around its corners?",
+            "Did you know that the Square-1 is a shape-shifting puzzle that can change its shape as you twist it?",
+            "Did you know that the speedcube community has its own slang and terminology?",
+            "Did you know that 'alg' is short for algorithm, which is a sequence of moves used to solve the cube?",
+            "Did you know that 'PLL' stands for Permutation of the Last Layer?",
+            "Did you know that 'OLL' stands for Orientation of the Last Layer?",
+            "Did you know that 'F2L' stands for First Two Layers?",
+            "Did you know that 'cubers' is a term used to refer to people who solve Rubik's Cubes?",
+            "Did you know that the World Cube Association (WCA) is the governing body for official speedcubing competitions?",
+            "Did you know that the World Cube Association (WCA) was founded in 2004?",
+            "Did you know that there are over 1,000 official WCA competitions held worldwide each year?",
+            "Did you know that there are over 100,000 registered WCA competitors?",
+            "Did you know that the WCA maintains official records for various cube sizes and categories?",
+            "Did you know that the Rubik's Cube has been used to teach problem-solving skills in schools?",
+            "Did you know that there are online communities and forums dedicated to speedcubing?",
+            "Did you know that there are YouTube channels and tutorials dedicated to teaching people how to solve the Rubik's Cube?",
+            "Did you know that there are mobile apps that help you learn how to solve the Rubik's Cube?",
+            "Did you know that a lot of speedcubers can solve the Rubik's Cube in under 10 seconds?",
+            "Did you know that the Rubik's Cube has been used for a variety of world records, including solving it while juggling?",
+            "Did you know that the Rubik's Cube has been used in robotics competitions?",
+            "Did you know that there are custom stickers and designs available for Rubik's Cubes?",
+            "Did you know that almost every speedcubers lubricate their cubes?",
+            "Did you know that the Rubik's Cube has been featured in music videos?",
+            "Did you know that the Rubik's Cube has been used in psychological studies on problem-solving and cognition?",
+            "Did you know that the Rubik's Cube has a dedicated museum in Budapest, Hungary?",
+            "Did you know that the Rubik's Cube has been used in various educational programs to teach math and spatial reasoning?",
+            "Did you know that the Rubik's Cube has inspired various competitions, including solving it with feet?",
+            "Did you know that the Rubik's Cube has been used in art installations around the world?",
+            "Did you know that the Rubik's Cube has a dedicated day called 'Rubik's Cube Day' celebrated on July 13th?",
+            "Did you know that the Rubik's Cube continues to inspire new generations of puzzlers and enthusiasts around the world?"
+        ];
 
         function lookupValue() {
-            const input = document.getElementById("INT").value;
+            const val = parseInt(document.getElementById("INT").value);
             const display = document.getElementById("display_area");
-            
-            if (myData[input]) {
-                display.innerText = myData[input];
+
+            if (val >= 1 && val <= facts.length) {
+                display.innerText = facts[val - 1];
                 display.style.color = "#333";
             } else {
                 display.innerText = "Please enter a valid number between 1 and 51.";
@@ -125,11 +209,10 @@
             }
         }
 
-        document.getElementById("INT").addEventListener("keypress", function(event) {
-            if (event.key === "Enter") {
-                lookupValue();
-            }
+        document.getElementById("INT").addEventListener("keypress", (e) => {
+            if (e.key === "Enter") lookupValue();
         });
     </script>
+
 </body>
 </html>

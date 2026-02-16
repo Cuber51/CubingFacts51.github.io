@@ -1,5 +1,5 @@
 const facts = [
-    "Did you know that the world record for solving a 3x3 Rubik's Cube is 3.05 seconds?",
+    "Did you know that the world record for solving a 3x3 Rubik's Cube is 2.76 seconds?",
     "Did you know that the Rubik's Cube was invented in 1974 by Ernő Rubik?",
     "Did you know that there are over 43 quintillion possible combinations of a standard 3x3 Rubik's Cube?",
     "Did you know that the first speedcubing competition was held in 1982 in Budapest, Hungary?",
